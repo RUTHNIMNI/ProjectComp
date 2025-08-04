@@ -1,0 +1,222 @@
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* מרכז הכל אופקית */
+  min-height: 100vh;
+}
+
+.title {
+  width: 100%;           /* תופס את כל הרוחב הזמין */
+  max-width: 100%;      /* לא עובר את 700px */
+  margin: 0 auto;        /* מרכז את האלמנט */
+  color: beige;
+  background-color: #b67c31;
+  text-align: center;
+  padding: 10px;
+  margin-top: 40px;
+  margin-bottom: 40px;
+  box-sizing: border-box; /* חשוב כדי שה-padding ייכנס בחישוב הרוחב */
+   font-size: 2.5rem;      /* הגדלת הכתב */
+  font-weight: bold;
+
+}
+
+.add-todo-container {
+  display: flex;                   /* תצוגה גמישה (flex) */
+  flex-direction: row; /* עכשיו האלמנטים יהיו בשורה */
+  align-items: center;             /* ממרכז את האלמנטים אופקית */
+  align-items: center;      /* ממרכז אנכית */
+  justify-content: center;  /* ממרכז אופקית */
+  margin-top: 10px;                /* ריווח חיצוני מעל של 20 פיקסלים */
+  margin-bottom: 10px; 
+}
+
+.input-row {
+  display: flex;                   /* תצוגה גמישה */
+  flex-direction: row;             /* כיוון אלמנטים לשורה (משמאל לימין) */
+  align-items: center;             /* ממרכז את האלמנטים אנכית */
+  margin-bottom: 20px;             /* ריווח חיצוני מתחת של 20 פיקסלים */
+}
+
+input[type='text'] {
+    width: 70%;            /* גמיש, לא קבוע */
+  width: 600px;                    /* רוחב קבוע של 600 פיקסלים */
+  max-width: 600px;                /* רוחב מקסימלי של 600 פיקסלים */
+  padding: 0 10px;                 /* ריווח פנימי ימינה ושמאלה של 10 פיקסלים */
+  font-size: 1.2em;                /* גודל טקסט גדול */
+  height: 35px;                    /* גובה של 35 פיקסלים */
+  border-radius: 5px;              /* פינות מעוגלות */
+  border: 1px solid #b67c31;       /* מסגרת דקה בצבע חום-צהבהב */
+  box-sizing: border-box;          /* כולל את המסגרת והריווח בתוך הרוחב */
+  direction: ltr;                  /* כיוון כתיבה משמאל לימין */
+  text-align: left;                /* יישור טקסט לשמאל */
+}
+
+button {
+  background-color: beige;         /* רקע בז' */
+  color: #b67c31;                  /* טקסט חום-צהבהב */
+  padding: 0 15px;                 /* ריווח פנימי ימינה ושמאלה של 15 פיקסלים */
+  height: 35px;                    /* גובה של 35 פיקסלים */
+  font-size: 1.1em;                /* גודל טקסט */
+  cursor: pointer;                 /* סמן עכבר משתנה ליד */
+  margin-left: 10px;               /* ריווח חיצוני משמאל של 10 פיקסלים */
+  border-radius: 5px;              /* פינות מעוגלות */
+  border: 1px solid #b67c31;       /* מסגרת דקה בצבע חום-צהבהב */
+}
+
+button:hover {
+  background-color: #dbceb0;       /* רקע בז' כהה יותר כאשר מרחפים */
+}
+
+.todo-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;      /* מרכז את כל המשימות אופקית */
+  margin-top: 40px;         /* ריווח מעל */
+  max-width: 700px;
+  width: 100%;
+  margin-left: 0;           /* בטל את הדחיפה שמאלה */
+}
+
+
+.todo-item {
+  background-color: beige;         /* רקע בז' */
+  padding: 10px;                   /* ריווח פנימי של 10 פיקסלים */
+  margin-bottom: 5px;              /* ריווח חיצוני מתחת של 5 פיקסלים */
+  border-radius: 5px;              /* פינות מעוגלות */
+  display: flex;                   /* תצוגה גמישה */
+  align-items: center;             /* ממרכז את האלמנטים אנכית */
+  justify-content: space-between;  /* מרווח בין האלמנטים */
+  max-width: 700px;      /* רוחב מקסימלי */
+  width: 100%;           /* תופס את כל הרוחב הזמין */
+  box-sizing: border-box;
+    border-bottom: 1px solid #ddd;
+
+}
+
+.todo-item input[type='checkbox'] {
+  margin-right: 10px;              /* ריווח חיצוני מימין של 10 פיקסלים */
+
+}
+
+
+.task-text {
+  flex-grow: 1;                    /* האלמנט תופס את כל השטח הפנוי */
+  margin-left: 10px;
+   word-wrap: break-word; /* מאפשר שבירת מילים */
+  max-width: 70%; /* הגבלת רוחב ל-70% מההורה */
+  
+}
+
+.task-date {
+  color: black !important;
+  font-size: 1em !important;
+  display: inline !important;
+
+  margin-left: 10px;
+  color: #888;
+  font-size: 0.85em;
+    margin-right: 10px; /* מוסיף רווח גם לפני הכפתור */
+  margin-right: 10px; /* מוסיף רווח גם לפני הכפתור */
+
+}
+ 
+
+.delete-button {
+  
+  border: none;                    /* ללא מסגרת */
+  padding: 5px 10px;               /* ריווח פנימי של 5 פיקסלים למעלה/למטה ו-10 פיקסלים לימין/שמאל */
+  border-radius: 5px;              /* פינות מעוגלות */
+  cursor: pointer;                 /* סמן עכבר משתנה ליד */
+}
+
+.delete-button:hover {
+  background-color: #ff1a1a;       /* רקע אדום כהה יותר כאשר מרחפים */
+}
+
+.filter-buttons {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.filter-button {
+  width: 120px;
+  height: 40px;
+  color: #fff8f0;
+  padding: 0;
+  margin: 0 5px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  font-size: 1.1em;
+  transition: opacity 0.2s;
+  box-sizing: border-box;
+  letter-spacing: 1px;
+}
+
+.filter-button.all {
+  background-color: #7d6f3b; /* ירוק-זית חום */
+  /* אפשר גם: background-color: #8b7b4a; */
+}
+
+.filter-button.active {
+  background-color: #b97b3e; /* כתום-חום זהבהב */
+  /* אפשר גם: background-color: #c98c4a; */
+}
+
+.filter-button.completed {
+  background-color: #4a6a7b; /* כחול-טורקיז כהה עם נגיעה חומה */
+  /* אפשר גם: background-color: #5c7a87; */
+}
+
+.filter-button:hover {
+  opacity: 0.85;
+}
+.modal-overlay {
+  position: fixed;           /* מקבע את האלמנט על כל המסך */
+  top: 0;                    /* מתחיל מהחלק העליון של המסך */
+  left: 0;                   /* מתחיל מהחלק השמאלי של המסך */
+  width: 100vw;              /* רוחב כל המסך */
+  height: 100vh;             /* גובה כל המסך */
+  background: rgba(30,30,30,0.5); /* רקע כהה שקוף */
+  display: flex;             /* מאפשר יישור פנימי עם Flexbox */
+  align-items: center;       /* ממרכז אנכית */
+  justify-content: center;   /* ממרכז אופקית */
+  z-index: 1000;             /* מעל כל האלמנטים האחרים */
+}
+
+
+.modal-content {
+  background: #b67c31; /* צבע רקע מותאם */
+  color: #fffbe6;      /* צבע טקסט מותאם */
+  padding: 10px 20px 24px;      /* 32px למעלה ולמטה, 24px ימין ושמאל */
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+  text-align: center;
+  font-weight: bold;
+  margin: 0 0 32px 0;      /* אין רווח למעלה, 32px רווח למטה */
+}
+
+.confirm-btn {
+  
+  color: b67c31;
+  border: none;
+  padding: 8px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  margin: 0 8px 0 8px;     /* רווח בין הכפתורים, אין רווח למעלה/למטה */
+}
+
+.cancel-btn {
+  background: #fffbe6;
+  color: #b67c31;
+  border: 1px solid #b67c31;
+  padding: 8px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  margin: 0 8px 0 8px;     /* רווח בין הכפתורים, אין רווח למעלה/למטה */
+}
