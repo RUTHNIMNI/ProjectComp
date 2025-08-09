@@ -10,9 +10,11 @@ function DoApp() {
 // הגדרת קומפוננטת הבסיס של האפליקציה.
   const [todos, setTodos] = useState([]); // יצירת state עבור רשימת המשימות, מתחיל כ-array ריק.
   const [task, setTask] = useState(''); // יצירת state עבור הטקסט של המשימה החדשה.
+  const [deadline, setDeadline] = useState(''); // הוספת // שדה חדש: תאריך דד ליין שהמשתמש בוחרן
   const [filterSelection, setFilterSelection] = useState("all");
+
   
-  const addTask = (task) => { // פונקציה להוספת משימה חדשה.
+  const addTask = (task, deadline) => { // פונקציה להוספת משימה חדשה.
     setTodos(prevTodos => [ // 1. מבקשים מ-React את הרשימה הכי עדכנית של todos (המשימות).
   ...prevTodos,        // 2. משכפלים את כל המשימות הקיימות.
   {
@@ -20,10 +22,12 @@ function DoApp() {
   text: task,             //    - הטקסט של המשימה.
   completed: false,       //    - האם המשימה הושלמה (בהתחלה לא).  
   createdAt: new Date().toISOString(),  // 4. מוסיפים שדה תאריך, בפורמט ISO (תאריך מלא).
+   deadline: deadline, //  בתוך האובייקט של המשימה שומר את הדד ליין
 }
 ]);
  //  מוסיף משימה חדשה עם מזהה ייחודי (id) וטקסט לרשימת המשימות.
     clearTask(); // מנקה את שדה הקלט לאחר ההוספה.
+    setDeadline(''); // מאפס  את הדד ליין
   };
 
   const clearTask = () => { // פונקציה שמנקה את שדה הקלט.
@@ -51,7 +55,9 @@ const filteredTodos = todos.filter(task => {
 <div className="app-container">
       <Title />
       <AddTodo task={task} 
-      setTask={setTask} 
+      setTask={setTask}
+      deadline={deadline} // חדש!
+      setDeadline={setDeadline} // חדש! 
       addTask={addTask} 
       />
       <FilterToolbar setFilterSelection={setFilterSelection} />
