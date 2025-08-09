@@ -14,35 +14,16 @@ function DoApp() {
   const [filterSelection, setFilterSelection] = useState("all");
 
   
-  // לוג כללי על כל רינדור
-  useEffect(() => {
-    console.info("DoApp rendered. Current todos:", todos); // מדפיס בכל רינדור את מצב המשימות. חשוב כדי לעקוב אחרי שינויים בסטייט ולוודא שהרינדור מתבצע נכון.
-  });
-  
-  const addTask = (task, deadline) => { // פונקציה להוספת משימה חדשה.
-  const sanitizedTask = DOMPurify.sanitize(task).trim(); // טיהור והסרת רווחים מיותרים
-  if (!sanitizedTask) {
-    // אם אחרי הטיהור הקלט ריק, לא מוסיפים משימה
-         console.warn("Attempted to add empty task. Ignored."); // מדווח שנעשה ניסיון להוסיף משימה ריקה. עוזר לזהות טעויות קלט של המשתמש
-    return;
-  }
-    setTodos(prevTodos => {// 1. מבקשים מ-React את הרשימה הכי עדכנית של todos (המשימות).
-   const newTask = {     
-  
+  const addTask = (task) => { // פונקציה להוספת משימה חדשה.
+    setTodos(prevTodos => [ // 1. מבקשים מ-React את הרשימה הכי עדכנית של todos (המשימות).
+  ...prevTodos,        // 2. משכפלים את כל המשימות הקיימות.
+  {
   id: Date.now(),         //    - יצירת מזהה ייחודי לכל משימה.       
    text: sanitizedTask,             //    - הטקסט של המשימה.
   completed: false,       //    - האם המשימה הושלמה (בהתחלה לא).  
   createdAt: new Date().toISOString(),  // 4. מוסיפים שדה תאריך, בפורמט ISO (תאריך מלא).
-   deadline: deadline, //  בתוך האובייקט של המשימה שומר את הדד ליין
-};
-
-  console.log("Task added:", newTask);
-
-  return [
-    ...prevTodos,   // 2. משכפלים את כל המשימות הקיימות.
-    newTask
-  ];
-});
+}
+]);
  //  מוסיף משימה חדשה עם מזהה ייחודי (id) וטקסט לרשימת המשימות.
     clearTask(); // מנקה את שדה הקלט לאחר ההוספה.
     setDeadline(''); // מאפס  את הדד ליין

@@ -43,42 +43,7 @@ const TodoItem = ({ task, removeTask, toggleComplete }) => { // מקבל props: 
         year: 'numeric'
         })
     )}
-     </span>
-      {task.deadline && ( // מציג את הדד ליין אם קיים
-        <span className="task-date">
-          Deadline: {new Date(task.deadline).toLocaleDateString('he-IL', {
-            day: '2-digit',
-            month: '2-digit',
-            year: 'numeric'
-          })}
-        </span>
-      )}
-
-      
-      {/* הצגת מספר הימים שנשארו עד הדד-ליין */}
-      {task.deadline && ( // מציג את ההפרש רק אם יש דד-ליין
-        <span
-    className="days-left"
-    // הגדרת צבע דינמי לפי מצב הדד-ליין
-    style={{
-      marginRight: '10px',
-      // אם נשארו 2 ימים או פחות, או שהדד-ליין עבר, הצבע יהיה אדום. אחרת, צבע חום-צהבהב.
-      color: (daysLeft <= 2 && !task.completed) ? '#ff1a1a' : '#b67c31', // אדום אם 2 ימים או פחות, אחרת חום
-      fontWeight: 'bold'
-    }}
-  >
-    {/* אם המשימה הושלמה, מציג "Done". אחרת, מציג את מספר הימים או הודעת דד-ליין */}
-    {task.completed
-      ? 'Done'
-      : (
-          daysLeft >= 0
-            ? `Days left: ${daysLeft} ${daysLeft === 1 ? 'day' : 'days'}` // If days left
-            : 'Deadline passed' // אם הדד ליין עבר
-        )
-    }
-  </span>
-)}
-
+    </span>
 
 <button
   className="delete-button"
