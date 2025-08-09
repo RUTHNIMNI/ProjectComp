@@ -14,7 +14,7 @@ function DoApp() {
   const [filterSelection, setFilterSelection] = useState("all");
 
   
-  const addTask = (task) => { // פונקציה להוספת משימה חדשה.
+  const addTask = (task, deadline) => { // פונקציה להוספת משימה חדשה.
     setTodos(prevTodos => [ // 1. מבקשים מ-React את הרשימה הכי עדכנית של todos (המשימות).
   ...prevTodos,        // 2. משכפלים את כל המשימות הקיימות.
   {
@@ -22,6 +22,7 @@ function DoApp() {
    text: sanitizedTask,             //    - הטקסט של המשימה.
   completed: false,       //    - האם המשימה הושלמה (בהתחלה לא).  
   createdAt: new Date().toISOString(),  // 4. מוסיפים שדה תאריך, בפורמט ISO (תאריך מלא).
+   deadline: deadline, //  בתוך האובייקט של המשימה שומר את הדד ליין
 }
 ]);
  //  מוסיף משימה חדשה עם מזהה ייחודי (id) וטקסט לרשימת המשימות.
