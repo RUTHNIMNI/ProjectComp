@@ -4,6 +4,7 @@ import Title from './Title';
 import AddTodo from './AddTodo';
 import TodoList from './TodoList';
 import FilterToolbar from './FilterToolbar';
+import DOMPurify from 'dompurify';
 import './todoStyle.css';
 
 function DoApp() { 
@@ -15,11 +16,16 @@ function DoApp() {
 
   
   const addTask = (task, deadline) => { // פונקציה להוספת משימה חדשה.
+  const sanitizedTask = DOMPurify.sanitize(task).trim(); // טיהור והסרת רווחים מיותרים
+  if (!sanitizedTask) {
+    // אם אחרי הטיהור הקלט ריק, לא מוסיפים משימה
+    return;
+  }
     setTodos(prevTodos => [ // 1. מבקשים מ-React את הרשימה הכי עדכנית של todos (המשימות).
   ...prevTodos,        // 2. משכפלים את כל המשימות הקיימות.
   {
   id: Date.now(),         //    - יצירת מזהה ייחודי לכל משימה.       
-  text: task,             //    - הטקסט של המשימה.
+   text: sanitizedTask,             //    - הטקסט של המשימה.
   completed: false,       //    - האם המשימה הושלמה (בהתחלה לא).  
   createdAt: new Date().toISOString(),  // 4. מוסיפים שדה תאריך, בפורמט ISO (תאריך מלא).
    deadline: deadline, //  בתוך האובייקט של המשימה שומר את הדד ליין
