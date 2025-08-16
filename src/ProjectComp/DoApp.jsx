@@ -11,6 +11,11 @@ function DoApp() {
   const [todos, setTodos] = useState([]); // יצירת state עבור רשימת המשימות, מתחיל כ-array ריק.
   const [task, setTask] = useState(''); // יצירת state עבור הטקסט של המשימה החדשה.
   const [filterSelection, setFilterSelection] = useState("all");
+
+  //  חישוב הסיכום 
+  const totalTasks = todos.length;
+  const completedTasks = todos.filter(t => t.completed).length;
+  const activeTasks = todos.filter(t => !t.completed).length;
   
   const addTask = (task) => { // פונקציה להוספת משימה חדשה.
     setTodos(prevTodos => [ // 1. מבקשים מ-React את הרשימה הכי עדכנית של todos (המשימות).
@@ -50,6 +55,13 @@ const filteredTodos = todos.filter(task => {
   return (
 <div className="app-container">
       <Title />
+        {/*   הצגת הסיכום  */}
+      <div className="summary-bar">
+        <span>סה"כ משימות: {totalTasks}</span>
+        <span> | פעילות: {activeTasks}</span>
+        <span> | הושלמו: {completedTasks}</span>
+      </div>
+
       <AddTodo task={task} 
       setTask={setTask} 
       addTask={addTask} 

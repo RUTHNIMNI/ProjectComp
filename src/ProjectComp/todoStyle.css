@@ -220,3 +220,21 @@ button:hover {
   font-weight: bold;
   margin: 0 8px 0 8px;     /* רווח בין הכפתורים, אין רווח למעלה/למטה */
 }
+
+.summary-bar {
+  width: 100%;
+  max-width: 700px;
+  margin: 0 auto 20px auto;
+  background-color: #f5e6c2;
+  color: #7d6f3b;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-align: center;
+  padding: 10px 0;
+  border-radius: 8px;
+  box-sizing: border-box;
+  letter-spacing: 1px;
+}
+.summary-bar span {
+  margin: 0 10px;
+}
