@@ -3,10 +3,14 @@ import React, { useState } from 'react';
 import { differenceInDays } from 'date-fns'; // מייבא את הפונקציה שמחשבת את ההפרש בימים
 import './todoStyle.css';
 
-const TodoItem = ({ task, removeTask, toggleComplete }) => { // מקבל props: משימה, פונקציית מחיקה, ופונקציית השלמה
+const TodoItem = ({ task, removeTask, toggleComplete, updateTaskText }) => { // מקבל props: משימה, פונקציית מחיקה, ופונקציית השלמה
   console.log(task); // בדיקה
   // state לניהול הופעת המודאל
   const [showModal, setShowModal] = useState(false);      // state שמנהל האם להציג את המודאל (ברירת מחדל: false)
+
+    // state לניהול מצב עריכה וערך זמני
+  const [isEditing, setIsEditing] = useState(false); 
+  const [editValue, setEditValue] = useState(task.text); 
 
     // חישוב הימים שנשארו עד הדד-ליין (אם יש דד-ליין)
   let daysLeft = null; // משתנה שישמור את מספר הימים שנשארו
@@ -27,6 +31,15 @@ const TodoItem = ({ task, removeTask, toggleComplete }) => { // מקבל props: 
 
   const cancelDelete = () => setShowModal(false); // סוגרת את המודאל בלי למחוק
 
+  //  פונקציה לשמירת העריכה
+  const handleSaveEdit = () => {
+    if (editValue.trim()) {
+      updateTaskText(task.id, editValue); 
+      setIsEditing(false); 
+    }
+  };
+
+
   return (
     <div className="todo-item">     {/* עטיפה של המשימה */}
         <input
@@ -34,7 +47,39 @@ const TodoItem = ({ task, removeTask, toggleComplete }) => { // מקבל props: 
         checked={task.completed} // קושר את מצב הסימון לערך completed של המשימה
         onChange={() => toggleComplete(task.id)} // קורא לפונקציה שמעדכנת את מצב המשימה
       />
-    <span className="task-text">{task.text}</span>
+       {/* חדש! הצגת שם המשימה או שדה עריכה */}
+      {!isEditing ? (
+        <>
+          <span className="task-text">{task.text}</span>
+          <button
+            className="edit-button" // חדש!
+            onClick={() => {
+              setIsEditing(true); // חדש!
+              setEditValue(task.text); // חדש!
+            }}
+          >
+            ערוך
+          </button>
+        </>
+      ) : (
+        <>
+          <input
+            className="edit-input" // חדש!
+            type="text"
+            value={editValue}
+            onChange={e => setEditValue(e.target.value)} // חדש!
+            onKeyDown={e => {
+              if (e.key === 'Enter') handleSaveEdit(); // חדש!
+              if (e.key === 'Escape') setIsEditing(false); // חדש!
+            }}
+            autoFocus
+          />
+          <button className="save-button" onClick={handleSaveEdit}>שמור</button> {/* חדש! */}
+          <button className="cancel-button" onClick={() => setIsEditing(false)}>ביטול</button> {/* חדש! */}
+        </>
+      )}
+
+   
     <span className="task-date">
         Start date: {task.createdAt && (
         new Date(task.createdAt).toLocaleDateString('he-IL', {

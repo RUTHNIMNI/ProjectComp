@@ -50,6 +50,14 @@ const filteredTodos = todos.filter(task => {
   if (filterSelection === "completed") return task.completed;
   return true;
 });
+
+const updateTaskText = (id, newText) => {
+  setTodos(todos =>
+    todos.map(task =>
+      task.id === id ? { ...task, text: newText } : task
+    )
+  );
+};
   
   return (
 <div className="app-container">
@@ -65,6 +73,7 @@ const filteredTodos = todos.filter(task => {
       todos={filteredTodos} // filteredTodos הוא מערך של כל המשימות שרוצים להציג 
       removeTask={removeTask}
       toggleComplete={toggleComplete}
+      updateTaskText={updateTaskText}
       />
       
     </div>
