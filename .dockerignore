@@ -1,0 +1,21 @@
+node_modules
+build
+npm-debug.log
+
+src/components/
+src/App.css
+src/index.css
+src/index.js
+src/logo.svg
+src/reportWebVitals.js
+src/setupTests.js
+src/ToDo.css
+src/unit_tests.js
+
+# החרגת קבצי טסט של ProjectComp
+src/ProjectComp/*.test.js
+src/ProjectComp/*.spec.js
+src/ProjectComp/__tests__/
+
+.git
+.DS_Store
