@@ -13,8 +13,10 @@ function DoApp() {
   const [deadline, setDeadline] = useState(''); // הוספת // שדה חדש: תאריך דד ליין שהמשתמש בוחרן
   const [filterSelection, setFilterSelection] = useState("all");
 
-  
   const addTask = (task, deadline) => { // פונקציה להוספת משימה חדשה.
+    // כאן נוספה הגדרה של sanitizedTask
+  const sanitizedTask = DOMPurify.sanitize(task);
+  
     setTodos(prevTodos => [ // 1. מבקשים מ-React את הרשימה הכי עדכנית של todos (המשימות).
   ...prevTodos,        // 2. משכפלים את כל המשימות הקיימות.
   {
