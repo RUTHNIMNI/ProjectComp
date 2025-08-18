@@ -1,9 +1,9 @@
-
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react'; 
 import Title from './Title';
 import AddTodo from './AddTodo';
 import TodoList from './TodoList';
 import FilterToolbar from './FilterToolbar';
+import DOMPurify from 'dompurify';
 import './todoStyle.css';
 
 function DoApp() { 
@@ -19,7 +19,7 @@ function DoApp() {
   ...prevTodos,        // 2. משכפלים את כל המשימות הקיימות.
   {
   id: Date.now(),         //    - יצירת מזהה ייחודי לכל משימה.       
-  text: task,             //    - הטקסט של המשימה.
+   text: sanitizedTask,             //    - הטקסט של המשימה.
   completed: false,       //    - האם המשימה הושלמה (בהתחלה לא).  
   createdAt: new Date().toISOString(),  // 4. מוסיפים שדה תאריך, בפורמט ISO (תאריך מלא).
    deadline: deadline, //  בתוך האובייקט של המשימה שומר את הדד ליין
@@ -32,12 +32,17 @@ function DoApp() {
 
   const clearTask = () => { // פונקציה שמנקה את שדה הקלט.
     setTask(''); // מאפסת את הטקסט של המשימה החדשה.
+       console.debug("Task input cleared.");   // מדווח ששדה הקלט של המשימה נוקה. עוזר לוודא שהאפליקציה מתנהגת נכון אחרי הוספת משימה.
+
   };
   const removeTask = (id) => { // פונקציה שמסירה משימה לפי מזהה (id).
+      console.error("Removing task with id:", id);     //  מדווח שמסירים משימה לפי מזהה. עוזר לעקוב אחרי פעולות מחיקה ולזהות אם נמחקה המשימה הנכונה.
     setTodos(todos.filter((task) => task.id !== id)); // מסננת את המשימה עם ה-id הנתון מתוך הרשימה.
   };
    // פונקציה שמחליפה את completed (true/false) של משימה לפי מזהה
   const toggleComplete = (id) => {
+      console.log("Toggling completion for task with id:", id); //  מדווח שמחליפים את מצב ההשלמה של משימה מסוימת. עוזר לעקוב אחרי פעולות סימון/ביטול השלמה.
+    
     setTodos(todos.map(task =>
       task.id === id ? { ...task, completed: !task.completed } : task
     ));

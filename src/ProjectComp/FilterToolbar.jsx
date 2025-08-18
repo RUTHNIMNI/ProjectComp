@@ -16,3 +16,4 @@ const FilterToolbar = ({ setFilterSelection }) => {
 }
 
 export default FilterToolbar
+
